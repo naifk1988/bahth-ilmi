@@ -94,6 +94,20 @@ body.p-view .bar,body.p-view #list,body.p-view #paths{display:none}
 .btn.o{background:none;color:var(--navy)}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;padding:8px 18px;border-radius:999px;font-size:15px;opacity:0;transition:.25s;pointer-events:none;z-index:20}
 .toast.on{opacity:1}
+.steps>li.grp{counter-increment:none;padding:10px 0 2px;font-weight:700;font-size:19px;color:var(--navy);border-top:1px solid var(--line)}
+.steps>li.grp:before{display:none}
+.steps>li.grp.g1{font-size:17px;color:#6d5320;padding-top:4px;border-top:none}
+.steps ul li.nolink{color:var(--muted)}
+.steps ul li.nolink:before{content:"◂ ";color:var(--line)}
+.toc .tocb{padding:0 16px 14px}
+.toc a{display:block;text-decoration:none}
+.toc a.tc{font-weight:700;margin-top:8px;color:var(--navy)}
+.toc .ts a{font-size:16px;padding-inline-start:14px;color:var(--ink)}
+.toc .ts a.tsub{padding-inline-start:30px;color:var(--muted);font-size:15px}
+.toc a:hover{color:var(--gold)}
+[id^=ch]{scroll-margin-top:10px}
+.plus{color:var(--gold);font-weight:700;font-size:14px}
+.legend{color:var(--muted);font-size:14px;margin:0 0 6px}
 </style>
 </head>
 <body>
@@ -196,32 +210,45 @@ function render(){
 }
 function chapterItems(){
   const d=S.d,used=new Set(),mark=p=>{used.add(p.id);if(p.s&&d.series[p.s])d.series[p.s].parts.forEach(i=>used.add(i))};
-  d.chapters.forEach(c=>c.sections.forEach(s=>(s.items||[]).forEach(([id])=>{const p=byId(id);if(p)mark(p)})));
+  d.chapters.forEach(c=>c.sections.forEach(s=>(s.items||[]).forEach(([id])=>{const p=id!=null&&byId(id);if(p)mark(p)})));
   return d.chapters.map(c=>({title:c.title,sections:c.sections.map(s=>{
     let items;
-    if(s.items)items=s.items.filter(([id])=>byId(id)).map(([id,label])=>({p:byId(id),label}));
+    if(s.items)items=s.items.map(([id,label,plus])=>({p:id!=null?byId(id):null,label,plus}));
     else{
-      const rx=s.kw?new RegExp(s.kw,"i"):null;
-      items=[];
-      d.posts.forEach(p=>{
-        if(used.has(p.id)||p.cat!==s.cat||(s.sub&&p.sub!==s.sub))return;
+      const rx=s.kw?new RegExp(s.kw,"i"):null;items=[];
+      const src=s.cat==="*"?[...d.posts].sort((a,b)=>b.id-a.id):d.posts;
+      src.forEach(p=>{
+        if(used.has(p.id)||(s.cat!=="*"&&p.cat!==s.cat)||(s.sub&&p.sub!==s.sub)||(s.new&&!p.auto))return;
         const ser=p.s&&d.series[p.s];
         if(rx&&!rx.test(p.title)&&!(ser&&rx.test(ser.title)))return;
         mark(p);items.push({p:ser?byId(ser.parts[0])||p:p,label:ser?ser.title:p.title,n:ser?ser.parts.length:0});
       });
     }
-    return{t:s.t,items};
-  }).filter(s=>s.items.length)}));
+    return{t:s.t,group:s.group||[],items};
+  }).filter(s=>s.items.length)})).filter(c=>c.sections.length);
 }
 function renderPaths(){
   const d=S.d,box=document.getElementById("paths");
   if(box.dataset.done)return;
-  box.innerHTML=chapterItems().map((c,i)=>{
-    const n=c.sections.reduce((a,s)=>a+s.items.length,0);
-    return `<details class="path"${i<2?" open":""}><summary><h3>🔴 ${esc(c.title)}</h3><div class="n">${c.sections.length} أقسام · ${n} مادة</div></summary><ol class="steps">`+
-      c.sections.map(st=>`<li><h4>${esc(st.t)}</h4><ul>`+st.items.map(({p,label,n})=>
-        `<li><a href="${tg(p.id)}" target="_blank" rel="noopener">${esc(label)}</a>${n?` <small style="color:var(--muted)">(${n} أجزاء)</small>`:""}${p.auto?' <span class="tag new">جديد</span>':""}</li>`).join("")+`</ul></li>`).join("")+`</ol></details>`;
+  const chs=chapterItems();
+  const toc=`<details class="path toc" open><summary><h3>ملخص الفهرس</h3><div class="n">اضغط أي عنوان للانتقال إليه</div></summary><div class="tocb">`+
+    chs.map((c,i)=>`<a class="tc" href="#" data-go="ch${i}">🔴 ${esc(c.title)}</a><div class="ts">`+
+      (()=>{let last="",out=[],n=0;c.sections.forEach((st,j)=>{const g=st.group[0]||"";
+        if(g&&g!==last){n++;out.push(`<a href="#" data-go="ch${i}s${j}">${n}- ${esc(g)}</a>`);}
+        if(!g){n++;out.push(`<a href="#" data-go="ch${i}s${j}">${n}- ${esc(st.t)}</a>`);}
+        else out.push(`<a href="#" class="tsub" data-go="ch${i}s${j}">${esc(st.t)}</a>`);last=g;});return out.join("")})()+`</div>`).join("")+`</div></details>`;
+  box.innerHTML=`<p class="legend"><span class="plus">＋</span> مادة أضيفت من القناة على الفهرس الأصلي · السطور الرمادية لم تُربط بمنشور بعد</p>`+toc+chs.map((c,i)=>{
+    const n=c.sections.reduce((a,s)=>a+s.items.length,0);let lastG=[];
+    return `<details class="path" id="ch${i}"${i<1?" open":""}><summary><h3>🔴 ${esc(c.title)}</h3><div class="n">${c.sections.length} أقسام · ${n} مادة</div></summary><ol class="steps">`+
+      c.sections.map((st,j)=>{
+        let gh="";st.group.forEach((g,k)=>{if(lastG[k]!==g){gh+=`<li class="grp g${k}">${esc(g)}</li>`;lastG=st.group.slice(0,k+1)}});
+        if(!st.group.length)lastG=[];
+        return gh+`<li id="ch${i}s${j}"><h4>${esc(st.t)}</h4><ul>`+st.items.map(({p,label,n,plus})=>p?
+          `<li><a href="${tg(p.id)}" target="_blank" rel="noopener">${esc(label)}</a>${n?` <small style="color:var(--muted)">(${n} أجزاء)</small>`:""}${plus?' <span class="plus" title="أُضيفت من القناة على الفهرس الأصلي">＋</span>':""}${p.auto?' <span class="tag new">جديد</span>':""}</li>`:
+          `<li class="nolink">${esc(label)}</li>`).join("")+`</ul></li>`}).join("")+`</ol></details>`;
   }).join("");
+  box.querySelectorAll("[data-go]").forEach(a=>a.onclick=e=>{e.preventDefault();const el=document.getElementById(a.dataset.go);
+    const det=el.closest("details.path");if(det)det.open=true;el.scrollIntoView({behavior:"smooth",block:"start"})});
   box.dataset.done=1;
 }
 function showView(id){
