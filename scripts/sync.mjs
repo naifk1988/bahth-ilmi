@@ -119,7 +119,7 @@ async function apply(items) {
     let p = byId.get(r.id);
     if (!p) {
       if (skipped.has(r.id)) continue;            // مكرر مدموج في منشور آخر
-      if (!r._text && !r.file && !r._photos) { skipped.add(r.id); db.skipped.push(r.id); continue; }
+      if (!r._text && !r.file && !r.video) { skipped.add(r.id); db.skipped.push(r.id); continue; } // صورة بلا نص أو منشور فارغ
       const first = (r._text.split("\n").map(s => s.replace(/^[^\p{L}\p{N}]+/u, "").trim()).find(s => s.length > 3) || "");
       let title = r.file ? r.file.name.replace(/\.(pdf|docx?|xlsx?|zip|rar|dotx|bok)$/i, "").replace(/_/g, " ").trim() : first;
       title ||= r.video ? "مقطع مرئي" : (r.preview?.title || "منشور مصوّر");
@@ -139,7 +139,7 @@ async function apply(items) {
   }
 }
 
-const needBackfill = FULL || db.posts.some(p => !p.fetched);
+const needBackfill = FULL || !db.backfilled;
 if (needBackfill) {
   // من الأحدث إلى الأقدم صفحةً صفحة
   let before = null;
@@ -152,6 +152,7 @@ if (needBackfill) {
     if (min <= 1 || (before && min >= before)) break;
     before = min;
   }
+  db.backfilled = true; updated++;
 } else {
   let after = Math.max(...db.posts.map(p => p.id), ...db.skipped, 0);
   for (let page = 0; page < 30; page++) {

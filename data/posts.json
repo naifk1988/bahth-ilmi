@@ -24,18 +24,6 @@
  },
  "posts": [
   {
-   "id": 7,
-   "title": "منشور مصوّر",
-   "cat": "x",
-   "kind": "T",
-   "auto": true,
-   "date": "2021-10-20",
-   "photos": [
-    "media/7.jpg"
-   ],
-   "fetched": true
-  },
-  {
    "id": 8,
    "title": "أداة PDF Online لتحرير ملفات PDF والمستندات",
    "cat": "t",
@@ -425,30 +413,6 @@
    "fetched": true
   },
   {
-   "id": 41,
-   "title": "منشور مصوّر",
-   "cat": "x",
-   "kind": "T",
-   "auto": true,
-   "date": "2021-12-02",
-   "photos": [
-    "media/41.jpg"
-   ],
-   "fetched": true
-  },
-  {
-   "id": 42,
-   "title": "منشور مصوّر",
-   "cat": "x",
-   "kind": "T",
-   "auto": true,
-   "date": "2021-12-02",
-   "photos": [
-    "media/42.jpg"
-   ],
-   "fetched": true
-  },
-  {
    "id": 43,
    "title": "كشاف الدراسات الفقهية الطبية في المملكة العربية السعودية",
    "cat": "r",
@@ -602,18 +566,6 @@
     "size": "107.9 KB"
    },
    "date": "2021-12-16",
-   "fetched": true
-  },
-  {
-   "id": 55,
-   "title": "منشور مصوّر",
-   "cat": "x",
-   "kind": "T",
-   "auto": true,
-   "date": "2021-12-17",
-   "photos": [
-    "media/55.jpg"
-   ],
    "fetched": true
   },
   {
@@ -983,18 +935,6 @@
    "fetched": true
   },
   {
-   "id": 86,
-   "title": "منشور مصوّر",
-   "cat": "x",
-   "kind": "T",
-   "auto": true,
-   "date": "2022-03-17",
-   "photos": [
-    "media/86.jpg"
-   ],
-   "fetched": true
-  },
-  {
    "id": 89,
    "title": "ملفات فقهية لطلاب الشريعة وخريجيها",
    "cat": "f",
@@ -1130,18 +1070,6 @@
    "fetched": true
   },
   {
-   "id": 100,
-   "title": "منشور مصوّر",
-   "cat": "x",
-   "kind": "T",
-   "auto": true,
-   "date": "2022-04-18",
-   "photos": [
-    "media/100.jpg"
-   ],
-   "fetched": true
-  },
-  {
    "id": 101,
    "title": "كشاف الأبحاث الفقهية في المجلات السعودية",
    "cat": "r",
@@ -1155,18 +1083,6 @@
     "size": "14.3 MB"
    },
    "date": "2022-04-18",
-   "fetched": true
-  },
-  {
-   "id": 102,
-   "title": "منشور مصوّر",
-   "cat": "x",
-   "kind": "T",
-   "auto": true,
-   "date": "2022-04-18",
-   "photos": [
-    "media/102.jpg"
-   ],
    "fetched": true
   },
   {
@@ -1486,19 +1402,6 @@
     "desc": "ننتخب المفيد من جهود الخُبراء في سبيل تذليل جادة البحث وتمهيد طريقه."
    },
    "date": "2022-06-20",
-   "fetched": true
-  },
-  {
-   "id": 137,
-   "title": "منشور مصوّر",
-   "cat": "x",
-   "kind": "T",
-   "auto": true,
-   "fwd": "بهجة النفوس",
-   "date": "2022-07-06",
-   "photos": [
-    "media/137.jpg"
-   ],
    "fetched": true
   },
   {
@@ -2339,18 +2242,6 @@
    "fetched": true
   },
   {
-   "id": 203,
-   "title": "منشور مصوّر",
-   "cat": "x",
-   "kind": "T",
-   "auto": true,
-   "date": "2023-02-10",
-   "photos": [
-    "media/203.jpg"
-   ],
-   "fetched": true
-  },
-  {
    "id": 204,
    "title": "دليل البحث في Google Books للباحثين",
    "cat": "l",
@@ -2391,19 +2282,6 @@
    "kind": "L",
    "html": "لطلب رسالة من جامعة أم القرى :<br/><a href=\"https://uqu.edu.sa/lib\" target=\"_blank\" rel=\"noopener\">https://uqu.edu.sa/lib</a><br/><br/>ويطلبها من هذه الأيقونة <i class=\"emoji\" style=\"background-image:url('//telegram.org/img/emoji/40/F09F9187.png')\"><b>👇</b></i>",
    "date": "2023-02-26",
-   "fetched": true
-  },
-  {
-   "id": 208,
-   "title": "لطلب رسالة من جامعة أم القرى : https://uqu.edu.sa/lib  ويطلبها من هذه الأيقونة 👇",
-   "cat": "r",
-   "kind": "T",
-   "auto": true,
-   "html": "لطلب رسالة من جامعة أم القرى : https://uqu.edu.sa/lib  ويطلبها من هذه الأيقونة <i class=\"emoji\" style=\"background-image:url('//telegram.org/img/emoji/40/F09F9187.png')\"><b>👇</b></i>",
-   "date": "2023-02-26",
-   "photos": [
-    "media/208.jpg"
-   ],
    "fetched": true
   },
   {
@@ -2614,28 +2492,6 @@
    "fetched": true
   },
   {
-   "id": 224,
-   "title": "القالب",
-   "cat": "x",
-   "kind": "T",
-   "auto": true,
-   "html": "القالب",
-   "fwd": "سند العطوي",
-   "date": "2023-03-19",
-   "fetched": true
-  },
-  {
-   "id": 225,
-   "title": "الدليل",
-   "cat": "x",
-   "kind": "T",
-   "auto": true,
-   "html": "الدليل",
-   "fwd": "سند العطوي",
-   "date": "2023-03-19",
-   "fetched": true
-  },
-  {
    "id": 226,
    "title": "أرشيف مجلات سكوبس وISI",
    "cat": "j",
@@ -2778,19 +2634,6 @@
     "size": "234.6 KB"
    },
    "date": "2023-05-04",
-   "fetched": true
-  },
-  {
-   "id": 239,
-   "title": "منشور مصوّر",
-   "cat": "x",
-   "kind": "T",
-   "auto": true,
-   "fwd": "رواق البحث العلمي 📖",
-   "date": "2023-05-07",
-   "photos": [
-    "media/239.jpg"
-   ],
    "fetched": true
   },
   {
@@ -3836,18 +3679,6 @@
    "fetched": true
   },
   {
-   "id": 324,
-   "title": "منشور مصوّر",
-   "cat": "x",
-   "kind": "T",
-   "auto": true,
-   "date": "2024-07-23",
-   "photos": [
-    "media/324.jpg"
-   ],
-   "fetched": true
-  },
-  {
    "id": 325,
    "title": "المتجر الرقمي لموقع العلامة ابن سعدي",
    "cat": "l",
@@ -3876,18 +3707,6 @@
    },
    "fwd": "قناة محمد القحطاني العلمية",
    "date": "2024-08-09",
-   "fetched": true
-  },
-  {
-   "id": 328,
-   "title": "منشور مصوّر",
-   "cat": "x",
-   "kind": "T",
-   "auto": true,
-   "date": "2024-08-11",
-   "photos": [
-    "media/328.jpg"
-   ],
    "fetched": true
   },
   {
@@ -3936,18 +3755,6 @@
     "size": "28.4 MB"
    },
    "date": "2024-08-18",
-   "fetched": true
-  },
-  {
-   "id": 333,
-   "title": "منشور مصوّر",
-   "cat": "x",
-   "kind": "T",
-   "auto": true,
-   "date": "2024-08-18",
-   "photos": [
-    "media/333.jpg"
-   ],
    "fetched": true
   },
   {
@@ -4018,18 +3825,6 @@
    },
    "fwd": "تحميل كتب جودة عالية📚",
    "date": "2024-09-02",
-   "fetched": true
-  },
-  {
-   "id": 339,
-   "title": "منشور مصوّر",
-   "cat": "x",
-   "kind": "T",
-   "auto": true,
-   "date": "2024-09-03",
-   "photos": [
-    "media/339.jpg"
-   ],
    "fetched": true
   },
   {
@@ -4279,18 +4074,6 @@
    "fetched": true
   },
   {
-   "id": 361,
-   "title": "منشور مصوّر",
-   "cat": "x",
-   "kind": "T",
-   "auto": true,
-   "date": "2024-10-13",
-   "photos": [
-    "media/361.jpg"
-   ],
-   "fetched": true
-  },
-  {
    "id": 362,
    "title": "مشاركة من قناة في الأصول والمقاصد",
    "cat": "f",
@@ -4357,18 +4140,6 @@
    "html": "<blockquote>قرارات هيئات ومجامع الاجتهاد الفقهي الجماعي </blockquote><br/><br/><blockquote><b>قرارات المجامع الفقهية</b></blockquote><br/><br/><i class=\"emoji\" style=\"background-image:url('//telegram.org/img/emoji/40/F09F939A.png')\"><b>📚</b></i> <a href=\"https://t.me/boyu3e/4708\" target=\"_blank\" rel=\"noopener\" onclick=\"return confirm('Open this link?\\n\\n'+this.href);\">قرارات و دورات المجمع الفقهي الإسلامي# بمكة</a><br/><br/><i class=\"emoji\" style=\"background-image:url('//telegram.org/img/emoji/40/F09F939A.png')\"><b>📚</b></i><a href=\"https://t.me/boyu3e/4710\" target=\"_blank\" rel=\"noopener\" onclick=\"return confirm('Open this link?\\n\\n'+this.href);\">قرارات-وتوصيات-1-24 # مجمع الفقه الإسلامي الدولي# الطبعة الثانية</a><br/><br/><i class=\"emoji\" style=\"background-image:url('//telegram.org/img/emoji/40/F09F939A.png')\"><b>📚</b></i><a href=\"https://t.me/boyu3e/4709\" target=\"_blank\" rel=\"noopener\" onclick=\"return confirm('Open this link?\\n\\n'+this.href);\">القرارات والفتاوى الصادرة عن المجلس الأوروبي للإفتاء والبحوث</a><br/><br/><i class=\"emoji\" style=\"background-image:url('//telegram.org/img/emoji/40/F09F939A.png')\"><b>📚</b></i><a href=\"https://t.me/boyu3e/4706\" target=\"_blank\" rel=\"noopener\" onclick=\"return confirm('Open this link?\\n\\n'+this.href);\">الدليل الشرعي للمعاملات الاقتصادية والمالية المعاصرة # الصادر عن دار الإفتاء الأردنية</a><br/><br/><a href=\"https://t.me/boyu3e/4711\" target=\"_blank\" rel=\"noopener\" onclick=\"return confirm('Open this link?\\n\\n'+this.href);\">المعايير_الشرعية_طبعة_ثانية_13_02_2022_</a><br/><b><br/></b><blockquote><b>قرارات اللجان الشرعية بالمصارف الإسلامية</b></blockquote><br/><br/><i class=\"emoji\" style=\"background-image:url('//telegram.org/img/emoji/40/F09F939A.png')\"><b>📚</b></i><a href=\"https://t.me/boyu3e/4712\" target=\"_blank\" rel=\"noopener\" onclick=\"return confirm('Open this link?\\n\\n'+this.href);\">قرارات الهيئة الشرعية بمصرف الراجحي مجلدين</a><br/><br/><i class=\"emoji\" style=\"background-image:url('//telegram.org/img/emoji/40/F09F939A.png')\"><b>📚</b></i><a href=\"https://t.me/boyu3e/4701\" target=\"_blank\" rel=\"noopener\" onclick=\"return confirm('Open this link?\\n\\n'+this.href);\">قرارات الهيئة الشرعية لشركة الراجحي المصرفية للاستثمار [ثلاثة مجلدات]</a><br/><br/><i class=\"emoji\" style=\"background-image:url('//telegram.org/img/emoji/40/F09F939A.png')\"><b>📚</b></i><a href=\"https://t.me/boyu3e/4705\" target=\"_blank\" rel=\"noopener\" onclick=\"return confirm('Open this link?\\n\\n'+this.href);\">الاحكام_والضوابط_الشرعية_لمنتجات_الانماء_وخدماته_٢٠٢٣</a>_<br/><br/><i class=\"emoji\" style=\"background-image:url('//telegram.org/img/emoji/40/F09F939A.png')\"><b>📚</b></i><a href=\"https://t.me/boyu3e/4707\" target=\"_blank\" rel=\"noopener\" onclick=\"return confirm('Open this link?\\n\\n'+this.href);\">الضوابط_المستخلصة_من_قرارات_الهيئة_الشرعية_لبنك_البلاد</a><br/><br/><a href=\"https://t.me/boyu3e/4721\" target=\"_blank\" rel=\"noopener\" onclick=\"return confirm('Open this link?\\n\\n'+this.href);\"><i class=\"emoji\" style=\"background-image:url('//telegram.org/img/emoji/40/F09F939A.png')\"><b>📚</b></i> فتاوى الهية الشرعية لبنك دبي الإسلامي</a><br/><br/><i class=\"emoji\" style=\"background-image:url('//telegram.org/img/emoji/40/F09F939A.png')\"><b>📚</b></i> <a href=\"https://t.me/boyu3e/5626?single\" target=\"_blank\" rel=\"noopener\" onclick=\"return confirm('Open this link?\\n\\n'+this.href);\">فتاوى الهيئة الشرعية ببنك البحرين</a><br/><br/><i class=\"emoji\" style=\"background-image:url('//telegram.org/img/emoji/40/F09F939A.png')\"><b>📚</b></i> الأحكام المستخلصة من قرارات اللجنة الشرعية لمنتجات البنك الأهلي السعودي<br/><br/><blockquote><b>القرارات الخاصة بالزكاة</b></blockquote><br/> <br/><br/><i class=\"emoji\" style=\"background-image:url('//telegram.org/img/emoji/40/F09F939A.png')\"><b>📚</b></i><a href=\"https://t.me/boyu3e/4704\" target=\"_blank\" rel=\"noopener\" onclick=\"return confirm('Open this link?\\n\\n'+this.href);\">دليل الارشادات الخاص بحساب الزكاة</a> <br/><br/><a href=\"https://t.me/zakat4u/1180\" target=\"_blank\" rel=\"noopener\" onclick=\"return confirm('Open this link?\\n\\n'+this.href);\"><i class=\"emoji\" style=\"background-image:url('//telegram.org/img/emoji/40/F09F939A.png')\"><b>📚</b></i> أبحاث_وأعمال_ندوة_ قضايا_الزكاة_المعاصرة 1 إلى 27  بعض الندوات غير موجود أصلا على الموقع </a><br/><br/>ليت من يقف على أي قرارات خاصة بالمجامع الفقهية ، يراسلنا مشكورا في التعليقات لإضافته",
    "fwd": "| فقه المالية الإسلامية |",
    "date": "2024-10-29",
-   "fetched": true
-  },
-  {
-   "id": 367,
-   "title": "منشور مصوّر",
-   "cat": "x",
-   "kind": "T",
-   "auto": true,
-   "date": "2024-10-30",
-   "photos": [
-    "media/367.jpg"
-   ],
    "fetched": true
   },
   {
@@ -4969,19 +4740,6 @@
    "fetched": true
   },
   {
-   "id": 427,
-   "title": "منشور مصوّر",
-   "cat": "x",
-   "kind": "T",
-   "auto": true,
-   "fwd": "قناة:ياسر الثميري",
-   "date": "2025-05-22",
-   "photos": [
-    "media/427.jpg"
-   ],
-   "fetched": true
-  },
-  {
    "id": 428,
    "title": "قرارات مجمع الفقه الإسلامي الدولي (مرتبة موضوعيًا)",
    "cat": "f",
@@ -5409,19 +5167,6 @@
    "fetched": true
   },
   {
-   "id": 465,
-   "title": "منشور مصوّر",
-   "cat": "x",
-   "kind": "T",
-   "auto": true,
-   "fwd": "أبو خالد",
-   "date": "2025-12-22",
-   "photos": [
-    "media/465.jpg"
-   ],
-   "fetched": true
-  },
-  {
    "id": 466,
    "title": "منصة «مخطوطة» — جامعة الملك سعود",
    "cat": "m",
@@ -5466,18 +5211,6 @@
    "sub": "fq",
    "html": "<a href=\"https://drive.google.com/file/d/1YP_0547o61wIybu9rPVTThZFcBmCJfy1/view\" target=\"_blank\" rel=\"noopener\">https://drive.google.com/file/d/1YP_0547o61wIybu9rPVTThZFcBmCJfy1/view</a><br/><br/>الفهرس الجامع لمصادر قرارت هيئة الاجتهاد الفقهي الجماعي<br/>إعداد: محمد أبو الفضل",
    "date": "2026-01-27",
-   "fetched": true
-  },
-  {
-   "id": 471,
-   "title": "منشور مصوّر",
-   "cat": "x",
-   "kind": "T",
-   "auto": true,
-   "date": "2026-02-05",
-   "photos": [
-    "media/471.jpg"
-   ],
    "fetched": true
   },
   {
@@ -5834,25 +5567,47 @@
   }
  },
  "skipped": [
+  1,
+  7,
+  41,
+  42,
   52,
+  55,
+  86,
+  100,
+  102,
   128,
+  137,
   140,
   198,
+  203,
+  208,
+  224,
+  225,
+  239,
   240,
   287,
   298,
   318,
+  324,
   326,
+  328,
+  333,
+  339,
   355,
+  361,
+  367,
   368,
   371,
   377,
+  427,
   451,
+  465,
   467,
+  471,
   472,
   476,
-  485,
-  1
+  485
  ],
  "chapters": [
   {
@@ -7632,5 +7387,6 @@
    ]
   }
  ],
- "updated": "2026-11-27T19:57:22.860Z"
+ "updated": "2026-11-27T19:57:22.860Z",
+ "backfilled": true
 }

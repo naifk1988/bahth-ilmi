@@ -153,7 +153,9 @@ function clean(html){
     [...c.attributes].forEach(a=>{if(!(c.tagName==="A"&&a.name==="href"))c.removeAttribute(a.name)});
     if(c.tagName==="A"){const h=c.getAttribute("href")||"",m=h.match(/t\.me\/(?:s\/)?al_bahth_al_ilmi\/(\d+)/i);
       if(m&&byId[+m[1]])c.setAttribute("href","#p="+m[1]);
-      else if(/^(https?:|tg:)/i.test(h)){c.setAttribute("target","_blank");c.setAttribute("rel","noopener")}else c.removeAttribute("href")}
+      else if(/^(https?:|tg:)/i.test(h)){c.setAttribute("target","_blank");c.setAttribute("rel","noopener");
+        const tx=c.textContent.trim();if(/^(https?:\/\/|www\.)/i.test(tx)){try{c.textContent=new URL(/^www\./i.test(tx)?"http://"+tx:tx).hostname.replace(/^www\./,"")+" ↗"}catch(e){}}}
+      else c.removeAttribute("href")}
     walk(c)})};
   walk(root);return root.innerHTML;
 }
@@ -168,8 +170,9 @@ function post(id){
   if(p.html)h+=`<div class="txt">${clean(p.html)}</div>`;
   if(p.preview&&p.preview.url)h+=`<a class="prev" href="${esc(p.preview.url)}" target="_blank" rel="noopener"><small>${esc(p.preview.site||"")}</small><b>${esc(p.preview.title||p.preview.url)}</b>${p.preview.desc?`<small>${esc(p.preview.desc)}</small>`:""}</a>`;
   if(p.file)h+=`<div class="box"><span class="bi">📄</span><span class="bt">${esc(p.file.name)}<small>${esc(p.file.size||"")}</small></span><a class="btn" href="${tg(p.id)}" target="_blank" rel="noopener">تنزيل</a></div>`;
+  if(!p.file&&(p.kind==="P"||p.kind==="F"))h+=`<div class="box"><span class="bi">📄</span><span class="bt">${esc(p.title)}<small>${p.kind==="P"?"ملف PDF":"ملف"}</small></span><a class="btn" href="${tg(p.id)}" target="_blank" rel="noopener">تنزيل</a></div>`;
+  if(!p.video&&p.kind==="V")h+=`<div class="box"><span class="bi">▶️</span><span class="bt">مقطع مرئي</span><a class="btn" href="${tg(p.id)}" target="_blank" rel="noopener">مشاهدة</a></div>`;
   if(p.video)h+=`<div class="box"><span class="bi">▶️</span><span class="bt">مقطع مرئي<small>${esc(p.duration||"")}</small></span><a class="btn" href="${tg(p.id)}" target="_blank" rel="noopener">مشاهدة</a></div>`;
-  if(!p.fetched)h+=`<p class="crumb" style="margin-top:12px">نص هذا المنشور يُضاف قريبًا.</p>`;
   if(p.also)h+=`<p class="crumb" style="margin-top:12px">نُشر أيضًا: ${p.also.map(i=>`<a href="${tg(i)}" target="_blank" rel="noopener">#${i}</a>`).join("، ")}</p>`;
   if(ser){const parts=ser.parts.map(i=>byId[i]).filter(Boolean);
     h+=`<div class="box" style="display:block"><b style="font-size:16px">${esc(ser.title)} — ${parts.length} أجزاء</b>`+parts.map(x=>`<a href="#p=${x.id}" style="display:block;padding:2px 0;font-size:16px${x.id===id?";color:var(--gold);font-weight:700":""}">${esc(x.title)}</a>`).join("")+`</div>`}
