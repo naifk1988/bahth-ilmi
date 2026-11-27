@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>فهرس قناة البحث العلمي</title>
-<meta name="description" content="فهرس مصنّف لكل ما نُشر في قناة «البحث العلمي»: كشافات وأدلة وفهارس مخطوطات ومواقع وأدوات للباحثين، مع مسارات للباحث.">
+<meta name="description" content="فهرس موضوعي لقناة «البحث العلمي»: مهارات كتابة البحث، المخطوطات والتحقيق، الكشافات والقرارات، المكتبات والمحركات، والأدوات التقنية للباحث.">
 <meta name="theme-color" content="#1d2a44">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-512.png">
@@ -14,275 +14,135 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f7f3ea;--paper:#fffdf8;--ink:#1f2433;--muted:#6b6a72;--navy:#1d2a44;--gold:#b08a3e;--gold-soft:#f1e6cc;--line:#e6dcc6;--blue:#e8ebf2}
+:root{--bg:#f7f3ea;--paper:#fffdf8;--ink:#1f2433;--muted:#77737a;--navy:#1d2a44;--gold:#b08a3e;--soft:#f1e6cc;--line:#ebe2cf}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:"Amiri",serif;font-size:18px;line-height:1.7}
-a{color:inherit}
-header{background:var(--navy);color:#fff;padding:24px 18px 0;text-align:center}
-header h1{margin:0;font-size:28px}
-header p{margin:4px 0 0;color:#d9cfb8;font-size:15px}
-header p a{color:var(--gold-soft)}
-.tabs{display:flex;justify-content:center;gap:4px;margin-top:14px}
-.tabs button{font:inherit;font-size:17px;background:none;border:none;color:#cfd6e4;padding:8px 16px;border-bottom:3px solid transparent;cursor:pointer}
-.tabs button.on{color:#fff;border-bottom-color:var(--gold)}
-.wrap{max-width:900px;margin:0 auto;padding:0 14px}
-.bar{position:sticky;top:0;z-index:5;background:var(--bg);padding:12px 0 6px;border-bottom:1px solid var(--line)}
-#q{width:100%;padding:11px 14px;font:inherit;font-size:18px;border:1px solid var(--line);border-radius:12px;background:var(--paper)}
-#q:focus{outline:2px solid var(--gold);border-color:transparent}
-.chips{display:flex;gap:7px;overflow-x:auto;padding:8px 0 2px;scrollbar-width:none}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Amiri",serif;font-size:18px;line-height:1.65}
+a{color:inherit;text-decoration:none}
+header{background:var(--navy);color:#fff;padding:26px 16px 22px}
+.in{max-width:760px;margin:0 auto}
+header h1{margin:0;font-size:27px;cursor:pointer}
+header p{margin:2px 0 14px;color:#cbbf9f;font-size:15px}
+#q{width:100%;padding:12px 16px;font:inherit;font-size:18px;border:none;border-radius:14px;background:#fff;color:var(--ink)}
+#q:focus{outline:3px solid var(--gold)}
+main{max-width:760px;margin:0 auto;padding:18px 14px 50px}
+h2.sec{font-size:19px;margin:26px 0 10px;color:var(--navy)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:16px 14px;display:flex;flex-direction:column;gap:4px;min-height:132px;transition:.15s}
+.card:active{transform:scale(.98)}
+.card .ic{font-size:28px;line-height:1}
+.card b{font-size:18.5px;line-height:1.45}
+.card small{color:var(--muted);font-size:14px;margin-top:auto}
+.list{background:var(--paper);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.row{display:flex;align-items:center;gap:10px;padding:11px 14px;border-top:1px solid var(--line);cursor:pointer}
+.list>:first-child .row,.list>.row:first-child{border-top:none}
+.list>details:first-child>summary.row{border-top:none}
+.row:active{background:var(--soft)}
+.tt{flex:1;min-width:0}
+.crumb{display:block;color:var(--muted);font-size:13.5px;line-height:1.4}
+.k{flex:none;font-size:12.5px;color:var(--gold);border:1px solid var(--soft);background:#fbf6ea;border-radius:8px;padding:0 7px;white-space:nowrap}
+details.ser>summary{list-style:none}
+details.ser>summary::-webkit-details-marker{display:none}
+details.ser .parts{padding:0 14px 8px;background:#fcf9f2}
+details.ser .parts a{display:block;padding:5px 12px;border-inline-start:2px solid var(--soft);font-size:16.5px}
+.back{display:inline-block;color:var(--navy);font-size:16px;margin-bottom:6px}
+.chead{display:flex;gap:10px;align-items:flex-start;margin-bottom:6px}
+.chead .ic{font-size:30px;line-height:1.2}
+.chead h1{font-size:23px;margin:0;line-height:1.45}
+.chips{position:sticky;top:0;z-index:4;background:var(--bg);display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;margin:0 -14px;padding:10px 14px}
 .chips::-webkit-scrollbar{display:none}
-.chips:empty{display:none}
-.chip{flex:none;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:3px 13px;font:inherit;font-size:15px;cursor:pointer;white-space:nowrap}
-.chip b{color:var(--gold);font-weight:700}
-.chip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
-.chip.on b{color:var(--gold-soft)}
-.chip.sub{font-size:14px;background:var(--gold-soft);border-color:transparent}
-.chip.sub.on{background:var(--gold);color:#fff}
-.meta{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:15px;padding:4px 0}
-.meta button{font:inherit;font-size:15px;background:none;border:none;color:var(--navy);cursor:pointer;text-decoration:underline}
-ul{list-style:none;margin:0;padding:0 0 30px}
-li.it{background:var(--paper);border:1px solid var(--line);border-radius:14px;margin:9px 0;padding:11px 12px;display:flex;gap:10px;align-items:flex-start}
-.num{flex:none;min-width:44px;text-align:center;color:var(--gold);font-weight:700;font-size:15px;padding-top:2px;line-height:1.3}
-.body{flex:1;min-width:0}
-.t{font-size:18.5px;font-weight:700;text-decoration:none;display:block}
-.t:hover{color:var(--gold)}
-.tags{margin-top:3px;display:flex;flex-wrap:wrap;gap:5px;font-size:13.5px}
-.tag{background:var(--gold-soft);color:#6d5320;border-radius:6px;padding:0 7px}
-.tag.k{background:var(--blue);color:var(--navy)}
-.tag.new{background:var(--navy);color:#fff}
-.tag.ser{background:#fff;border:1px solid var(--gold);color:#6d5320}
-.also{font-size:14px;color:var(--muted);margin-top:2px}
-.also a{color:var(--navy)}
-.acts{flex:none;display:flex;flex-direction:column;gap:6px;align-items:center}
-.go{background:var(--navy);color:#fff;text-decoration:none;border-radius:10px;padding:5px 12px;font-size:15px;border:none;font-family:inherit;cursor:pointer}
-.ic{background:none;border:none;cursor:pointer;font-size:19px;line-height:1;padding:2px;color:var(--gold)}
-details.parts{margin-top:6px}
-details.parts summary{cursor:pointer;color:var(--navy);font-size:15px}
-details.parts ol{margin:6px 0 0;padding-inline-start:22px;font-size:16px}
-details.parts li{margin:2px 0}
-details.parts a{text-decoration:none;color:var(--ink)}
-details.parts a:hover{color:var(--gold)}
-.empty{text-align:center;color:var(--muted);padding:40px 0}
-footer{text-align:center;color:var(--muted);font-size:14px;padding:6px 0 30px}
+.chips a{flex:none;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:3px 13px;font-size:15px;white-space:nowrap}
+.chips a.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.grp{font-size:15px;color:var(--gold);margin:24px 2px -4px;font-weight:700}
+h3.st{font-size:18px;margin:20px 2px 8px;color:var(--navy);scroll-margin-top:60px}
+.empty{text-align:center;color:var(--muted);padding:30px 0}
+footer{text-align:center;color:var(--muted);font-size:13.5px;padding:24px 0 0}
+footer a{text-decoration:underline}
 mark{background:#f5dd9e;color:inherit;border-radius:3px}
-#paths{display:none;padding:14px 0 40px}
-body.p-paths #paths{display:block}
-body.p-paths .bar,body.p-paths #list,body.p-paths #view{display:none}
-.path{background:var(--paper);border:1px solid var(--line);border-radius:16px;margin:12px 0;overflow:hidden}
-.path>summary{list-style:none;cursor:pointer;padding:14px 16px}
-.path>summary::-webkit-details-marker{display:none}
-.path h3{margin:0;font-size:21px}
-.path .d{color:var(--muted);font-size:15px}
-.path .n{color:var(--gold);font-size:14px}
-.steps{padding:0 16px 14px;margin:0;list-style:none;counter-reset:s}
-.steps>li{counter-increment:s;position:relative;padding:8px 40px 8px 0;border-top:1px dashed var(--line)}
-.steps>li:before{content:counter(s);position:absolute;right:0;top:9px;width:28px;height:28px;border-radius:50%;background:var(--navy);color:#fff;font-size:15px;display:flex;align-items:center;justify-content:center}
-.steps h4{margin:0 0 2px;font-size:18px}
-.steps ul{padding:0;margin:0}
-.steps ul li{font-size:16px;margin:1px 0}
-.steps ul a{text-decoration:none}
-.steps ul a:hover{color:var(--gold)}
-.steps ul a:before{content:"◂ ";color:var(--gold)}
-#view{display:none;padding:14px 0 40px}
-body.p-view #view{display:block}
-body.p-view .bar,body.p-view #list,body.p-view #paths{display:none}
-.back{font:inherit;font-size:16px;background:none;border:none;color:var(--navy);cursor:pointer;padding:0;margin-bottom:10px}
-.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px}
-.card h2{margin:4px 0 10px;font-size:23px;line-height:1.5}
-.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-.btn{font:inherit;font-size:16px;border-radius:10px;padding:7px 16px;border:1px solid var(--navy);background:var(--navy);color:#fff;text-decoration:none;cursor:pointer}
-.btn.o{background:none;color:var(--navy)}
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;padding:8px 18px;border-radius:999px;font-size:15px;opacity:0;transition:.25s;pointer-events:none;z-index:20}
-.toast.on{opacity:1}
-.steps>li.grp{counter-increment:none;padding:10px 0 2px;font-weight:700;font-size:19px;color:var(--navy);border-top:1px solid var(--line)}
-.steps>li.grp:before{display:none}
-.steps>li.grp.g1{font-size:17px;color:#6d5320;padding-top:4px;border-top:none}
-.steps ul li.nolink{color:var(--muted)}
-.steps ul li.nolink:before{content:"◂ ";color:var(--line)}
-.toc .tocb{padding:0 16px 14px}
-.toc a{display:block;text-decoration:none}
-.toc a.tc{font-weight:700;margin-top:8px;color:var(--navy)}
-.toc .ts a{font-size:16px;padding-inline-start:14px;color:var(--ink)}
-.toc .ts a.tsub{padding-inline-start:30px;color:var(--muted);font-size:15px}
-.toc a:hover{color:var(--gold)}
-[id^=ch]{scroll-margin-top:10px}
-.plus{color:var(--gold);font-weight:700;font-size:14px}
-.legend{color:var(--muted);font-size:14px;margin:0 0 6px}
 </style>
 </head>
 <body>
-<header>
-  <h1>فهرس قناة «البحث العلمي»</h1>
-  <p>كل ما نُشر في <a href="https://t.me/al_bahth_al_ilmi" target="_blank" rel="noopener">القناة</a> مصنّفًا بعناوين — يُحدَّث تلقائيًا</p>
-  <div class="tabs"><button type="button" data-p="paths" class="on">الفهرس</button><button type="button" data-p="list">البحث</button><button type="button" data-p="fav">المفضلة</button></div>
-</header>
-<div class="wrap">
-  <div class="bar">
-    <input id="q" type="search" placeholder="ابحث: مخطوطات، كشاف، الشاملة، مجلة…" autocomplete="off">
-    <div class="chips" id="cats"></div>
-    <div class="chips" id="subs"></div>
-    <div class="chips" id="kinds"></div>
-    <div class="meta"><span id="count"></span><button id="sort" type="button"></button></div>
-  </div>
-  <ul id="list"></ul>
-  <section id="paths"></section>
-  <section id="view"></section>
-  <footer id="foot"></footer>
-</div>
-<div class="toast" id="toast"></div>
+<header><div class="in">
+  <h1 id="home">فهرس قناة «البحث العلمي»</h1>
+  <p>دليل الباحث إلى كل ما نُشر في القناة</p>
+  <input id="q" type="search" placeholder="ابحث في الفهرس…" autocomplete="off">
+</div></header>
+<main id="app"></main>
 <script>
-const S={d:null,cat:"",sub:"",kind:"",q:"",newest:true,page:"paths",fav:new Set()};
-try{S.fav=new Set(JSON.parse(localStorage.getItem("fav")||"[]"))}catch(e){}
-const saveFav=()=>{try{localStorage.setItem("fav",JSON.stringify([...S.fav]))}catch(e){}};
+const ICONS=["✍️","📜","📚","🔎","💻","🧩"];
+const SHORT=["كتابة البحث العلمي","المخطوطات والتحقيق","الموسوعات والكشافات والقرارات","المكتبات والمجلات والمحركات","أدوات تقنية للباحث","منوّع"];
+const KIND={P:"PDF",F:"ملف",L:"موقع",V:"مقطع",T:"فائدة",A:"تطبيق"};
+const S={d:null,q:"",chs:[],loc:{}};
 const norm=s=>s.replace(/[ً-ْٰـ]/g,"").replace(/[أإآ]/g,"ا").replace(/ى/g,"ي").replace(/ة/g,"ه").toLowerCase();
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const tg=id=>"https://t.me/"+S.d.channel+"/"+id;
-const siteUrl=id=>location.origin+location.pathname+"#p="+id;
-const byId=id=>S.byId[id];
-function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("on");setTimeout(()=>t.classList.remove("on"),1600)}
-function hl(t){
-  let out=esc(t);if(!S.q)return out;
-  S.q.split(/\s+/).filter(w=>w.length>1).forEach(w=>{out=out.split(esc(w)).join("<mark>"+esc(w)+"</mark>")});return out;
-}
-function chip(box,key,val,label,n,cls){
-  const b=document.createElement("button");b.type="button";b.className="chip"+(cls?" "+cls:"")+(S[key]===val?" on":"");
-  b.innerHTML="<bdi>"+esc(label)+"</bdi>"+(n!=null?" <b>"+n+"</b>":"");
-  b.onclick=()=>{S[key]=(S[key]===val&&val!=="")?"":val;if(key==="cat")S.sub="";render()};box.appendChild(b);
-}
-const inCat=(p,c)=>!c||p.cat===c||(p.tags||[]).includes(c);
-function tagsHtml(p,extra){
-  const d=S.d,sub=p.sub&&d.subs[p.cat]?d.subs[p.cat][p.sub]:"";
-  return `<div class="tags"><span class="tag">${esc(d.cats[p.cat])}</span>`+(sub?`<span class="tag">${esc(sub)}</span>`:"")+
-    (p.tags||[]).map(t=>`<span class="tag">${esc(d.cats[t])}</span>`).join("")+
-    (extra||`<span class="tag k">${esc(d.kinds[p.kind]||"")}</span>`)+(p.auto?'<span class="tag new">جديد</span>':"")+`</div>`;
-}
-function alsoHtml(p){return p.also?`<div class="also">نُشر أيضًا: ${p.also.map(i=>`<a href="${tg(i)}" target="_blank" rel="noopener">#${i}</a>`).join("، ")}</div>`:""}
-function actsHtml(id,href){
-  return `<div class="acts"><a class="go" href="${href}" target="_blank" rel="noopener">فتح</a>`+
-    `<button class="ic fav" type="button" data-id="${id}" aria-label="المفضلة">${S.fav.has(id)?"★":"☆"}</button>`+
-    `<button class="ic share" type="button" data-id="${id}" aria-label="مشاركة">⤴</button></div>`;
-}
-function itemHtml(p){
-  return `<li class="it"><span class="num">#${p.id}</span><div class="body"><a class="t" href="${tg(p.id)}" target="_blank" rel="noopener">${hl(p.title)}</a>`+
-    tagsHtml(p)+alsoHtml(p)+`</div>`+actsHtml(p.id,tg(p.id))+`</li>`;
-}
-function seriesHtml(key,parts){
-  const d=S.d,s=d.series[key],all=s.parts.map(byId).filter(Boolean),first=all[0]||parts[0];
-  const shown=parts.length<all.length?parts:all;
-  return `<li class="it"><span class="num">${all.length}<br><small style="font-weight:400;color:var(--muted)">أجزاء</small></span><div class="body">`+
-    `<a class="t" href="${tg(first.id)}" target="_blank" rel="noopener">${hl(s.title)}</a>`+
-    tagsHtml(first,`<span class="tag ser">سلسلة</span>`)+
-    `<details class="parts"${S.q?" open":""}><summary>عرض الأجزاء (${shown.length}${shown.length<all.length?" من "+all.length:""})</summary><ol>`+
-    shown.map(p=>`<li><a href="${tg(p.id)}" target="_blank" rel="noopener">${hl(p.title)}</a> <small style="color:var(--gold)">#${p.id}</small></li>`).join("")+
-    `</ol></details></div>`+actsHtml(first.id,tg(first.id))+`</li>`;
-}
-function render(){
-  const d=S.d;
-  document.body.className=S.page==="paths"?"p-paths":(S.page==="view"?"p-view":"");
-  document.querySelectorAll(".tabs button").forEach(b=>b.classList.toggle("on",b.dataset.p===S.page||(S.page==="view"&&b.dataset.p==="list")));
-  if(S.page==="paths"){renderPaths();return}
-  if(S.page==="view")return;
-  const words=norm(S.q).split(/\s+/).filter(Boolean);
-  let base=d.posts.filter(p=>words.every(w=>p._n.includes(w)));
-  if(S.page==="fav")base=base.filter(p=>S.fav.has(p.id));
-  const cats=document.getElementById("cats"),subs=document.getElementById("subs"),kinds=document.getElementById("kinds");
-  cats.innerHTML=subs.innerHTML=kinds.innerHTML="";
-  const k1=base.filter(p=>!S.kind||p.kind===S.kind);
-  chip(cats,"cat","","الكل",k1.length);
-  Object.entries(d.cats).forEach(([k,v])=>{const n=k1.filter(p=>inCat(p,k)).length;if(n)chip(cats,"cat",k,v,n)});
-  if(S.cat&&d.subs[S.cat]){
-    const c1=k1.filter(p=>p.cat===S.cat);
-    Object.entries(d.subs[S.cat]).forEach(([k,v])=>{const n=c1.filter(p=>p.sub===k).length;if(n)chip(subs,"sub",k,v,n,"sub")});
-  }
-  const c2=base.filter(p=>inCat(p,S.cat)&&(!S.sub||p.sub===S.sub));
-  chip(kinds,"kind","","كل الأنواع",null);
-  Object.entries(d.kinds).forEach(([k,v])=>{const n=c2.filter(p=>p.kind===k).length;if(n)chip(kinds,"kind",k,v,n)});
-  const rows=c2.filter(p=>!S.kind||p.kind===S.kind);
-  const groups=new Map(),out=[];
-  rows.forEach(p=>{if(p.s&&d.series[p.s]){if(!groups.has(p.s)){groups.set(p.s,[]);out.push({s:p.s})}groups.get(p.s).push(p)}else out.push(p)});
-  const key=o=>o.s?(S.newest?Math.max(...groups.get(o.s).map(p=>p.id)):Math.min(...groups.get(o.s).map(p=>p.id))):o.id;
-  out.sort((a,b)=>S.newest?key(b)-key(a):key(a)-key(b));
-  document.getElementById("count").textContent=out.length+" مادة"+(rows.length!==out.length?" ("+rows.length+" منشورًا)":"");
-  document.getElementById("sort").textContent=S.newest?"الأقدم أولًا":"الأحدث أولًا";
-  const ul=document.getElementById("list");
-  if(!out.length){ul.innerHTML=`<div class="empty">${S.page==="fav"&&!S.fav.size?"لم تضف شيئًا إلى المفضلة بعد. اضغط ☆ بجانب أي مادة.":"لا نتائج. جرّب كلمة أخرى."}</div>`;return}
-  ul.innerHTML=out.map(o=>o.s?seriesHtml(o.s,groups.get(o.s)):itemHtml(o)).join("");
-}
-function chapterItems(){
+const strip=t=>t.replace(/^[أ-ي]-\s*/,"");
+let byId={};const tg=id=>"https://t.me/"+S.d.channel+"/"+id;
+
+function build(){
   const d=S.d,used=new Set(),mark=p=>{used.add(p.id);if(p.s&&d.series[p.s])d.series[p.s].parts.forEach(i=>used.add(i))};
-  d.chapters.forEach(c=>c.sections.forEach(s=>(s.items||[]).forEach(([id])=>{const p=id!=null&&byId(id);if(p)mark(p)})));
-  return d.chapters.map(c=>({title:c.title,sections:c.sections.map(s=>{
-    let items;
-    if(s.items)items=s.items.map(([id,label,plus])=>({p:id!=null?byId(id):null,label,plus}));
-    else{
-      const rx=s.kw?new RegExp(s.kw,"i"):null;items=[];
-      const src=s.cat==="*"?[...d.posts].sort((a,b)=>b.id-a.id):d.posts;
-      src.forEach(p=>{
-        if(used.has(p.id)||(s.cat!=="*"&&p.cat!==s.cat)||(s.sub&&p.sub!==s.sub)||(s.new&&!p.auto))return;
-        const ser=p.s&&d.series[p.s];
-        if(rx&&!rx.test(p.title)&&!(ser&&rx.test(ser.title)))return;
-        mark(p);items.push({p:ser?byId(ser.parts[0])||p:p,label:ser?ser.title:p.title,n:ser?ser.parts.length:0});
-      });
-    }
-    return{t:s.t,group:s.group||[],items};
+  d.chapters.forEach(c=>c.sections.forEach(s=>(s.items||[]).forEach(([id])=>{const p=id!=null&&byId[id];if(p)mark(p)})));
+  const item=(p,label)=>{const ser=p.s&&d.series[p.s];return{p:ser?byId[ser.parts[0]]||p:p,label:ser&&!label?ser.title:(label||p.title),ser}};
+  let chs=d.chapters.map(c=>({title:c.title,auto:c.auto,sections:c.sections.map(s=>{
+    let items=[];
+    if(s.items)s.items.forEach(([id,label])=>{const p=id!=null&&byId[id];if(p)items.push(item(p,label))});
+    else{const src=s.cat==="*"?[...d.posts].sort((a,b)=>b.id-a.id):d.posts;
+      src.forEach(p=>{if(used.has(p.id)||(s.cat!=="*"&&p.cat!==s.cat)||(s.new&&!p.auto))return;mark(p);items.push(item(p))})}
+    return{t:strip(s.t),group:(s.group||[]).map(strip),items};
   }).filter(s=>s.items.length)})).filter(c=>c.sections.length);
+  const extra=chs.filter(c=>c.auto),real=chs.filter(c=>!c.auto);
+  extra.forEach(c=>c.sections.forEach(s=>{if(s.t==="مواد أخرى")s.t="منشورات أخرى";real[real.length-1].sections.push(s)}));
+  S.chs=real;
+  real.forEach((c,ci)=>c.sections.forEach(s=>s.items.forEach(it=>{if(!S.loc[it.p.id])S.loc[it.p.id]={ci,st:s.t}})));
 }
-function renderPaths(){
-  const d=S.d,box=document.getElementById("paths");
-  if(box.dataset.done)return;
-  const chs=chapterItems();
-  const toc=`<details class="path toc" open><summary><h3>ملخص الفهرس</h3><div class="n">اضغط أي عنوان للانتقال إليه</div></summary><div class="tocb">`+
-    chs.map((c,i)=>`<a class="tc" href="#" data-go="ch${i}">🔴 ${esc(c.title)}</a><div class="ts">`+
-      (()=>{let last="",out=[],n=0;c.sections.forEach((st,j)=>{const g=st.group[0]||"";
-        if(g&&g!==last){n++;out.push(`<a href="#" data-go="ch${i}s${j}">${n}- ${esc(g)}</a>`);}
-        if(!g){n++;out.push(`<a href="#" data-go="ch${i}s${j}">${n}- ${esc(st.t)}</a>`);}
-        else out.push(`<a href="#" class="tsub" data-go="ch${i}s${j}">${esc(st.t)}</a>`);last=g;});return out.join("")})()+`</div>`).join("")+`</div></details>`;
-  box.innerHTML=`<p class="legend"><span class="plus">＋</span> مادة أضيفت من القناة على الفهرس الأصلي · السطور الرمادية لم تُربط بمنشور بعد</p>`+toc+chs.map((c,i)=>{
-    const n=c.sections.reduce((a,s)=>a+s.items.length,0);let lastG=[];
-    return `<details class="path" id="ch${i}"${i<1?" open":""}><summary><h3>🔴 ${esc(c.title)}</h3><div class="n">${c.sections.length} أقسام · ${n} مادة</div></summary><ol class="steps">`+
-      c.sections.map((st,j)=>{
-        let gh="";st.group.forEach((g,k)=>{if(lastG[k]!==g){gh+=`<li class="grp g${k}">${esc(g)}</li>`;lastG=st.group.slice(0,k+1)}});
-        if(!st.group.length)lastG=[];
-        return gh+`<li id="ch${i}s${j}"><h4>${esc(st.t)}</h4><ul>`+st.items.map(({p,label,n,plus})=>p?
-          `<li><a href="${tg(p.id)}" target="_blank" rel="noopener">${esc(label)}</a>${n?` <small style="color:var(--muted)">(${n} أجزاء)</small>`:""}${plus?' <span class="plus" title="أُضيفت من القناة على الفهرس الأصلي">＋</span>':""}${p.auto?' <span class="tag new">جديد</span>':""}</li>`:
-          `<li class="nolink">${esc(label)}</li>`).join("")+`</ul></li>`}).join("")+`</ol></details>`;
-  }).join("");
-  box.querySelectorAll("[data-go]").forEach(a=>a.onclick=e=>{e.preventDefault();const el=document.getElementById(a.dataset.go);
-    const det=el.closest("details.path");if(det)det.open=true;el.scrollIntoView({behavior:"smooth",block:"start"})});
-  box.dataset.done=1;
+function hl(t){let o=esc(t);if(!S.q)return o;S.q.split(/\s+/).filter(w=>w.length>1).forEach(w=>{o=o.split(esc(w)).join("<mark>"+esc(w)+"</mark>")});return o}
+function rowHtml(it,crumb){
+  const {p,label,ser}=it;
+  const tt=`<span class="tt">${hl(label)}${crumb?`<span class="crumb">${esc(crumb)}</span>`:""}</span>`;
+  if(ser&&ser.parts.length>1){
+    return `<details class="ser"><summary class="row">${tt}<span class="k">${ser.parts.length} أجزاء ▾</span></summary><div class="parts">`+
+      ser.parts.map(i=>byId[i]).filter(Boolean).map(x=>`<a href="${tg(x.id)}" target="_blank" rel="noopener">${esc(x.title)}</a>`).join("")+`</div></details>`;
+  }
+  return `<a class="row" href="${tg(p.id)}" target="_blank" rel="noopener">${tt}<span class="k">${KIND[p.kind]||""}</span></a>`;
 }
-function showView(id){
-  const p=byId(id),v=document.getElementById("view");if(!p){go("list");return}
-  const d=S.d,s=p.s&&d.series[p.s];
-  v.innerHTML=`<button class="back" type="button">→ رجوع</button><div class="card"><span class="num" style="padding:0">#${p.id}</span>`+
-    `<h2>${esc(s?s.title:p.title)}</h2>`+tagsHtml(p)+alsoHtml(p)+
-    (s?`<ol style="font-size:16px;padding-inline-start:22px">`+s.parts.map(byId).filter(Boolean).map(x=>`<li><a href="${tg(x.id)}" target="_blank" rel="noopener">${esc(x.title)}</a></li>`).join("")+`</ol>`:"")+
-    `<div class="row"><a class="btn" href="${tg(p.id)}" target="_blank" rel="noopener">فتح في تيليجرام</a><button class="btn o share" type="button" data-id="${p.id}">مشاركة</button><button class="btn o fav" type="button" data-id="${p.id}">${S.fav.has(p.id)?"★ في المفضلة":"☆ أضف للمفضلة"}</button></div></div>`;
-  v.querySelector(".back").onclick=()=>{location.hash="";};
+function crumbOf(id){const l=S.loc[id];return l?(SHORT[l.ci]||S.chs[l.ci].title)+" › "+l.st:""}
+function home(){
+  const latest=[...S.d.posts].sort((a,b)=>b.id-a.id),seen=new Set(),rows=[];
+  for(const p of latest){const key=p.s||p.id;if(seen.has(key))continue;seen.add(key);
+    rows.push({p,label:p.s&&S.d.series[p.s]?S.d.series[p.s].title:p.title,ser:null});if(rows.length===6)break}
+  return `<div class="grid">`+S.chs.map((c,i)=>{const n=c.sections.reduce((a,s)=>a+s.items.length,0);
+      return `<a class="card" href="#c=${i}"><span class="ic">${ICONS[i]||"📁"}</span><b>${esc(SHORT[i]||c.title)}</b><small>${c.sections.length} أقسام · ${n} مادة</small></a>`}).join("")+`</div>`+
+    `<h2 class="sec">أحدث ما نُشر في القناة</h2><div class="list">`+rows.map(it=>rowHtml(it,crumbOf(it.p.id))).join("")+`</div>`+
+    `<footer>${S.d.posts.length} منشورًا مفهرسًا · يُحدَّث تلقائيًا من <a href="https://t.me/${S.d.channel}" target="_blank" rel="noopener">القناة</a></footer>`;
 }
-function go(page){S.page=page;if(page!=="view"&&location.hash)history.replaceState(null,"",location.pathname);render();window.scrollTo(0,0)}
-function route(){const m=location.hash.match(/p=(\d+)/);if(m&&S.d){if(S.page!=="view")S.prev=S.page;S.page="view";render();showView(+m[1]);window.scrollTo(0,0)}else if(S.page==="view"){S.page=S.prev||"paths";render()}}
-document.addEventListener("click",async e=>{
-  const f=e.target.closest(".fav"),sh=e.target.closest(".share"),tab=e.target.closest(".tabs button");
-  if(tab){go(tab.dataset.p);return}
-  if(f){const id=+f.dataset.id;S.fav.has(id)?S.fav.delete(id):S.fav.add(id);saveFav();toast(S.fav.has(id)?"أُضيفت إلى المفضلة":"أُزيلت من المفضلة");
-    if(S.page==="view")showView(id);else render();return}
-  if(sh){const id=+sh.dataset.id,p=byId(id),s=p.s&&S.d.series[p.s],title=s?s.title:p.title,url=siteUrl(id);
-    try{if(navigator.share){await navigator.share({title,url});return}}catch(err){return}
-    try{await navigator.clipboard.writeText(title+"\n"+url);toast("نُسخ الرابط")}catch(err){prompt("انسخ الرابط:",url)}}
-});
-let tmr;document.getElementById("q").addEventListener("input",e=>{clearTimeout(tmr);tmr=setTimeout(()=>{S.q=e.target.value.trim();render()},120)});
-document.getElementById("sort").onclick=()=>{S.newest=!S.newest;render()};
-window.addEventListener("hashchange",route);
+function chapter(ci){
+  const c=S.chs[ci];if(!c)return home();
+  let last="",body="";
+  c.sections.forEach((s,j)=>{const g=s.group.join(" › ");if(g&&g!==last)body+=`<div class="grp">${esc(g)}</div>`;last=g;
+    body+=`<h3 class="st" id="s${j}">${esc(s.t)}</h3><div class="list">`+s.items.map(it=>rowHtml(it)).join("")+`</div>`});
+  return `<a class="back" href="#">→ كل الأقسام</a><div class="chead"><span class="ic">${ICONS[ci]||"📁"}</span><h1>${esc(c.title)}</h1></div>`+
+    (c.sections.length>1?`<nav class="chips">`+c.sections.map((s,j)=>`<a href="#c=${ci}&s=${j}" data-s="${j}">${esc(s.t)}</a>`).join("")+`</nav>`:"")+body;
+}
+function search(){
+  const words=norm(S.q).split(/\s+/).filter(Boolean),seen=new Set(),res=[];
+  S.chs.forEach(c=>c.sections.forEach(s=>s.items.forEach(it=>{
+    const txt=norm(it.label+" "+it.p.title+" "+(it.ser?it.ser.parts.map(i=>byId[i]?byId[i].title:"").join(" "):""));
+    if(!seen.has(it.p.id)&&words.every(w=>txt.includes(w))){seen.add(it.p.id);res.push(it)}})));
+  return `<h2 class="sec" style="margin-top:4px">${res.length?res.length+" نتيجة":"لا نتائج"}</h2>`+
+    (res.length?`<div class="list">`+res.map(it=>rowHtml(it,crumbOf(it.p.id))).join("")+`</div>`:`<div class="empty">جرّب كلمة أخرى، مثل: كشاف، مخطوط، الشاملة، مجلة</div>`);
+}
+function render(scrollTop=true){
+  const app=document.getElementById("app"),m=location.hash.match(/c=(\d+)(?:&s=(\d+))?/);
+  if(S.q){app.innerHTML=search();return}
+  app.innerHTML=m?chapter(+m[1]):home();
+  if(m&&m[2]!=null){const el=document.getElementById("s"+m[2]);if(el){el.scrollIntoView();
+      document.querySelectorAll(".chips a").forEach(a=>a.classList.toggle("on",a.dataset.s===m[2]));return}}
+  if(scrollTop)window.scrollTo(0,0);
+}
+document.getElementById("home").onclick=()=>{S.q="";document.getElementById("q").value="";location.hash="";render()};
+let t;document.getElementById("q").addEventListener("input",e=>{clearTimeout(t);t=setTimeout(()=>{S.q=e.target.value.trim();render(false)},150)});
+window.addEventListener("hashchange",()=>{if(S.q){S.q="";document.getElementById("q").value=""}render()});
 fetch("data/posts.json",{cache:"no-cache"}).then(r=>r.json()).then(d=>{
-  d.subs=d.subs||{};d.series=d.series||{};d.chapters=d.chapters||[];S.byId={};
-  d.posts.forEach(p=>{S.byId[p.id]=p;const s=p.s&&d.series[p.s];
-    p._n=norm([p.title,s?s.title:"",d.cats[p.cat]||"",p.sub&&d.subs[p.cat]?d.subs[p.cat][p.sub]:"",...(p.tags||[]).map(t=>d.cats[t]),"#"+p.id].join(" "))});
-  S.d=d;
-  const last=d.updated?new Date(d.updated).toLocaleDateString("ar-SA",{day:"numeric",month:"long",year:"numeric"}):"";
-  document.getElementById("foot").textContent=d.posts.length+" منشورًا مفهرسًا"+(last?" · آخر تحديث "+last:"");
-  render();route();
-}).catch(()=>{document.getElementById("list").innerHTML='<div class="empty">تعذّر تحميل الفهرس.</div>'});
+  d.series=d.series||{};S.d=d;d.posts.forEach(p=>byId[p.id]=p);build();render();
+}).catch(()=>{document.getElementById("app").innerHTML='<div class="empty">تعذّر تحميل الفهرس.</div>'});
 </script>
 </body>
 </html>
