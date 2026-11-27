@@ -2,8 +2,15 @@ name: مزامنة منشورات القناة
 
 on:
   schedule:
-    - cron: "17 */3 * * *"   # كل 3 ساعات
+    - cron: "*/15 * * * *"   # كل 15 دقيقة
+  push:                       # يعمل أيضًا عند تعديل كود المزامنة
+    branches: [main]
+    paths: ["scripts/sync.mjs", ".github/workflows/sync.yml"]
   workflow_dispatch:          # تشغيل يدوي من تبويب Actions
+
+concurrency:
+  group: sync
+  cancel-in-progress: false
 
 permissions:
   contents: write
@@ -13,6 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - run: git pull --rebase origin main || true
       - uses: actions/setup-node@v4
         with:
           node-version: 22
