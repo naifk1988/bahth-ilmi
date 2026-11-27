@@ -58,10 +58,14 @@ h3.st{font-size:18px;margin:20px 2px 8px;color:var(--navy);scroll-margin-top:60p
 footer{text-align:center;color:var(--muted);font-size:13.5px;padding:24px 0 0}
 footer a{text-decoration:underline}
 mark{background:#f5dd9e;color:inherit;border-radius:3px}
+.homebtn{display:none;color:var(--soft);font-size:15px;border:1px solid rgba(241,230,204,.4);border-radius:999px;padding:2px 12px;margin-bottom:10px}
+body.inner .homebtn{display:inline-block}
+.chips a.hm{background:var(--gold);color:#fff;border-color:var(--gold)}
 </style>
 </head>
 <body>
 <header><div class="in">
+  <a id="homeBtn" class="homebtn" href="#">⌂ القائمة الرئيسية</a>
   <h1 id="home">فهرس قناة «البحث العلمي»</h1>
   <p>دليل الباحث إلى كل ما نُشر في القناة</p>
   <input id="q" type="search" placeholder="ابحث في الفهرس…" autocomplete="off">
@@ -118,8 +122,8 @@ function chapter(ci){
   let last="",body="";
   c.sections.forEach((s,j)=>{const g=s.group.join(" › ");if(g&&g!==last)body+=`<div class="grp">${esc(g)}</div>`;last=g;
     body+=`<h3 class="st" id="s${j}">${esc(s.t)}</h3><div class="list">`+s.items.map(it=>rowHtml(it)).join("")+`</div>`});
-  return `<a class="back" href="#">→ كل الأقسام</a><div class="chead"><span class="ic">${ICONS[ci]||"📁"}</span><h1>${esc(c.title)}</h1></div>`+
-    (c.sections.length>1?`<nav class="chips">`+c.sections.map((s,j)=>`<a href="#c=${ci}&s=${j}" data-s="${j}">${esc(s.t)}</a>`).join("")+`</nav>`:"")+body;
+  return `<a class="back" href="#">→ القائمة الرئيسية</a><div class="chead"><span class="ic">${ICONS[ci]||"📁"}</span><h1>${esc(c.title)}</h1></div>`+
+    (c.sections.length>1?`<nav class="chips"><a class="hm" href="#">⌂ الرئيسية</a>`+c.sections.map((s,j)=>`<a href="#c=${ci}&s=${j}" data-s="${j}">${esc(s.t)}</a>`).join("")+`</nav>`:"")+body;
 }
 function search(){
   const words=norm(S.q).split(/\s+/).filter(Boolean),seen=new Set(),res=[];
@@ -131,12 +135,14 @@ function search(){
 }
 function render(scrollTop=true){
   const app=document.getElementById("app"),m=location.hash.match(/c=(\d+)(?:&s=(\d+))?/);
+  document.body.classList.toggle("inner",!!(S.q||m));
   if(S.q){app.innerHTML=search();return}
   app.innerHTML=m?chapter(+m[1]):home();
   if(m&&m[2]!=null){const el=document.getElementById("s"+m[2]);if(el){el.scrollIntoView();
       document.querySelectorAll(".chips a").forEach(a=>a.classList.toggle("on",a.dataset.s===m[2]));return}}
   if(scrollTop)window.scrollTo(0,0);
 }
+document.getElementById("homeBtn").onclick=e=>{e.preventDefault();S.q="";document.getElementById("q").value="";history.pushState(null,"",location.pathname);render()};
 document.getElementById("home").onclick=()=>{S.q="";document.getElementById("q").value="";location.hash="";render()};
 let t;document.getElementById("q").addEventListener("input",e=>{clearTimeout(t);t=setTimeout(()=>{S.q=e.target.value.trim();render(false)},150)});
 window.addEventListener("hashchange",()=>{if(S.q){S.q="";document.getElementById("q").value=""}render()});
