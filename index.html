@@ -61,6 +61,25 @@ mark{background:#f5dd9e;color:inherit;border-radius:3px}
 .homebtn{display:none;color:var(--soft);font-size:15px;border:1px solid rgba(241,230,204,.4);border-radius:999px;padding:2px 12px;margin-bottom:10px}
 body.inner .homebtn{display:inline-block}
 .chips a.hm{background:var(--gold);color:#fff;border-color:var(--gold)}
+.post{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:18px 16px}
+.post .crumb{font-size:14px}
+.post h1{font-size:23px;line-height:1.5;margin:6px 0 4px}
+.meta{color:var(--muted);font-size:14px;display:flex;gap:10px;flex-wrap:wrap}
+.txt{font-size:19px;margin-top:14px;overflow-wrap:anywhere}
+.txt a{color:#2c4a8a;text-decoration:underline}
+.txt blockquote{margin:8px 0;padding:4px 12px;border-inline-start:3px solid var(--gold);background:#faf5e8}
+.post img{width:100%;border-radius:12px;margin-top:12px;display:block}
+.box{display:flex;align-items:center;gap:12px;margin-top:14px;padding:12px 14px;border-radius:14px;background:#fbf6ea;border:1px solid var(--soft)}
+.box .bi{font-size:26px}
+.box .bt{flex:1;min-width:0;overflow-wrap:anywhere;font-size:16.5px;line-height:1.5}
+.box .bt small{display:block;color:var(--muted);font-size:14px}
+.btn{flex:none;background:var(--navy);color:#fff;border-radius:10px;padding:7px 14px;font-size:15px}
+a.prev{display:block;margin-top:14px;border:1px solid var(--line);border-radius:14px;padding:10px 14px;background:#fff}
+a.prev b{display:block}
+a.prev small{color:var(--muted);display:block;font-size:14px}
+.pager{display:flex;justify-content:space-between;gap:10px;margin-top:14px}
+.pager a{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:6px 14px;font-size:15px}
+.tglink{display:block;text-align:center;color:var(--muted);font-size:14px;margin-top:16px;text-decoration:underline}
 </style>
 </head>
 <body>
@@ -103,9 +122,9 @@ function rowHtml(it,crumb){
   const tt=`<span class="tt">${hl(label)}${crumb?`<span class="crumb">${esc(crumb)}</span>`:""}</span>`;
   if(ser&&ser.parts.length>1){
     return `<details class="ser"><summary class="row">${tt}<span class="k">${ser.parts.length} أجزاء ▾</span></summary><div class="parts">`+
-      ser.parts.map(i=>byId[i]).filter(Boolean).map(x=>`<a href="${tg(x.id)}" target="_blank" rel="noopener">${esc(x.title)}</a>`).join("")+`</div></details>`;
+      ser.parts.map(i=>byId[i]).filter(Boolean).map(x=>`<a href="#p=${x.id}">${esc(x.title)}</a>`).join("")+`</div></details>`;
   }
-  return `<a class="row" href="${tg(p.id)}" target="_blank" rel="noopener">${tt}<span class="k">${KIND[p.kind]||""}</span></a>`;
+  return `<a class="row" href="#p=${p.id}">${tt}<span class="k">${KIND[p.kind]||""}</span></a>`;
 }
 function crumbOf(id){const l=S.loc[id];return l?(SHORT[l.ci]||S.chs[l.ci].title)+" › "+l.st:""}
 function home(){
@@ -125,6 +144,38 @@ function chapter(ci){
   return `<a class="back" href="#">→ القائمة الرئيسية</a><div class="chead"><span class="ic">${ICONS[ci]||"📁"}</span><h1>${esc(c.title)}</h1></div>`+
     (c.sections.length>1?`<nav class="chips"><a class="hm" href="#">⌂ الرئيسية</a>`+c.sections.map((s,j)=>`<a href="#c=${ci}&s=${j}" data-s="${j}">${esc(s.t)}</a>`).join("")+`</nav>`:"")+body;
 }
+const OK=new Set(["A","B","STRONG","I","EM","U","S","DEL","CODE","PRE","BLOCKQUOTE","BR"]);
+function clean(html){
+  const doc=new DOMParser().parseFromString("<div>"+html+"</div>","text/html"),root=doc.body.firstChild;
+  root.querySelectorAll("i.emoji").forEach(e=>e.replaceWith(e.textContent));
+  const walk=n=>{[...n.childNodes].forEach(c=>{if(c.nodeType!==1)return;
+    if(!OK.has(c.tagName)){const f=doc.createDocumentFragment();while(c.firstChild)f.appendChild(c.firstChild);c.replaceWith(f);walk(n);return}
+    [...c.attributes].forEach(a=>{if(!(c.tagName==="A"&&a.name==="href"))c.removeAttribute(a.name)});
+    if(c.tagName==="A"){const h=c.getAttribute("href")||"",m=h.match(/t\.me\/(?:s\/)?al_bahth_al_ilmi\/(\d+)/i);
+      if(m&&byId[+m[1]])c.setAttribute("href","#p="+m[1]);
+      else if(/^(https?:|tg:)/i.test(h)){c.setAttribute("target","_blank");c.setAttribute("rel","noopener")}else c.removeAttribute("href")}
+    walk(c)})};
+  walk(root);return root.innerHTML;
+}
+function post(id){
+  const d=S.d,p=byId[id];if(!p)return home();
+  const ser=p.s&&d.series[p.s],l=S.loc[id]||(ser&&S.loc[ser.parts[0]]);
+  const crumb=l?`<a href="#c=${l.ci}">${esc(SHORT[l.ci])}</a> › ${esc(l.st)}`:"";
+  const date=p.date?new Date(p.date).toLocaleDateString("ar-SA-u-ca-gregory",{year:"numeric",month:"long",day:"numeric"}):"";
+  let h=`<a class="back" href="#" onclick="if(history.length>1&&S.inSite){history.back();return false}">→ رجوع</a><article class="post">`+
+    (crumb?`<span class="crumb">${crumb}</span>`:"")+`<h1>${esc(p.title)}</h1><div class="meta">`+(date?`<span>${date}</span>`:"")+(p.fwd?`<span>منقول من: ${esc(p.fwd)}</span>`:"")+`</div>`;
+  (p.photos||[]).forEach(src=>h+=`<img src="${esc(src)}" alt="" loading="lazy">`);
+  if(p.html)h+=`<div class="txt">${clean(p.html)}</div>`;
+  if(p.preview&&p.preview.url)h+=`<a class="prev" href="${esc(p.preview.url)}" target="_blank" rel="noopener"><small>${esc(p.preview.site||"")}</small><b>${esc(p.preview.title||p.preview.url)}</b>${p.preview.desc?`<small>${esc(p.preview.desc)}</small>`:""}</a>`;
+  if(p.file)h+=`<div class="box"><span class="bi">📄</span><span class="bt">${esc(p.file.name)}<small>${esc(p.file.size||"")}</small></span><a class="btn" href="${tg(p.id)}" target="_blank" rel="noopener">تنزيل</a></div>`;
+  if(p.video)h+=`<div class="box"><span class="bi">▶️</span><span class="bt">مقطع مرئي<small>${esc(p.duration||"")}</small></span><a class="btn" href="${tg(p.id)}" target="_blank" rel="noopener">مشاهدة</a></div>`;
+  if(!p.fetched)h+=`<p class="crumb" style="margin-top:12px">نص هذا المنشور يُضاف قريبًا.</p>`;
+  if(p.also)h+=`<p class="crumb" style="margin-top:12px">نُشر أيضًا: ${p.also.map(i=>`<a href="${tg(i)}" target="_blank" rel="noopener">#${i}</a>`).join("، ")}</p>`;
+  if(ser){const parts=ser.parts.map(i=>byId[i]).filter(Boolean);
+    h+=`<div class="box" style="display:block"><b style="font-size:16px">${esc(ser.title)} — ${parts.length} أجزاء</b>`+parts.map(x=>`<a href="#p=${x.id}" style="display:block;padding:2px 0;font-size:16px${x.id===id?";color:var(--gold);font-weight:700":""}">${esc(x.title)}</a>`).join("")+`</div>`}
+  h+=`<a class="tglink" href="${tg(p.id)}" target="_blank" rel="noopener">المنشور في قناة تيليجرام</a></article>`;
+  return h;
+}
 function search(){
   const words=norm(S.q).split(/\s+/).filter(Boolean),seen=new Set(),res=[];
   S.chs.forEach(c=>c.sections.forEach(s=>s.items.forEach(it=>{
@@ -134,9 +185,10 @@ function search(){
     (res.length?`<div class="list">`+res.map(it=>rowHtml(it,crumbOf(it.p.id))).join("")+`</div>`:`<div class="empty">جرّب كلمة أخرى، مثل: كشاف، مخطوط، الشاملة، مجلة</div>`);
 }
 function render(scrollTop=true){
-  const app=document.getElementById("app"),m=location.hash.match(/c=(\d+)(?:&s=(\d+))?/);
-  document.body.classList.toggle("inner",!!(S.q||m));
+  const app=document.getElementById("app"),m=location.hash.match(/c=(\d+)(?:&s=(\d+))?/),pm=location.hash.match(/p=(\d+)/);
+  document.body.classList.toggle("inner",!!(S.q||m||pm));
   if(S.q){app.innerHTML=search();return}
+  if(pm){app.innerHTML=post(+pm[1]);window.scrollTo(0,0);return}
   app.innerHTML=m?chapter(+m[1]):home();
   if(m&&m[2]!=null){const el=document.getElementById("s"+m[2]);if(el){el.scrollIntoView();
       document.querySelectorAll(".chips a").forEach(a=>a.classList.toggle("on",a.dataset.s===m[2]));return}}
@@ -145,7 +197,7 @@ function render(scrollTop=true){
 document.getElementById("homeBtn").onclick=e=>{e.preventDefault();S.q="";document.getElementById("q").value="";history.pushState(null,"",location.pathname);render()};
 document.getElementById("home").onclick=()=>{S.q="";document.getElementById("q").value="";location.hash="";render()};
 let t;document.getElementById("q").addEventListener("input",e=>{clearTimeout(t);t=setTimeout(()=>{S.q=e.target.value.trim();render(false)},150)});
-window.addEventListener("hashchange",()=>{if(S.q){S.q="";document.getElementById("q").value=""}render()});
+window.addEventListener("hashchange",()=>{S.inSite=true;if(S.q){S.q="";document.getElementById("q").value=""}render()});
 fetch("data/posts.json",{cache:"no-cache"}).then(r=>r.json()).then(d=>{
   d.series=d.series||{};S.d=d;d.posts.forEach(p=>byId[p.id]=p);build();render();
 }).catch(()=>{document.getElementById("app").innerHTML='<div class="empty">تعذّر تحميل الفهرس.</div>'});
