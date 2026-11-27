@@ -1,0 +1,43 @@
+name: أرشفة القناة
+
+on:
+  schedule:
+    - cron: "17 */3 * * *"   # كل 3 ساعات: يضيف الجديد فقط
+  workflow_dispatch:          # تشغيل يدوي من تبويب Actions
+
+permissions:
+  contents: write
+
+concurrency:
+  group: archive
+  cancel-in-progress: false
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install telethon cryptg
+      - name: تنزيل المنشورات والملفات
+        env:
+          TG_API_ID: ${{ secrets.TG_API_ID }}
+          TG_API_HASH: ${{ secrets.TG_API_HASH }}
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/archive.py
+      - name: حفظ التحديث
+        if: always()
+        run: |
+          if [ -n "$(git status --porcelain data media)" ]; then
+            git config user.name "bahth-archive-bot"
+            git config user.email "actions@users.noreply.github.com"
+            git add data media
+            git commit -m "تحديث أرشيف القناة"
+            git push
+          else
+            echo "لا جديد"
+          fi
