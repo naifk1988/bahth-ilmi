@@ -69,7 +69,7 @@ body.detail .bar,body.detail #list,body.detail #foot{display:none}
 <body>
 <header>
   <h1>فهرس قناة «البحث العلمي»</h1>
-  <p>كل ما نُشر في القناة من ملفات وفوائد، مصنّفًا بعناوين — يُحدَّث تلقائيًا مع كل منشور جديد</p>
+  <p>كل ما نُشر في <a href="https://t.me/al_bahth_al_ilmi" target="_blank" rel="noopener">القناة</a> من ملفات وفوائد، مصنّفًا بعناوين — يُحدَّث تلقائيًا مع كل منشور جديد</p>
 </header>
 <div class="wrap">
   <div class="bar">
@@ -117,9 +117,11 @@ function render(){
   const ul=document.getElementById("list");
   if(!rows.length){ul.innerHTML='<div class="empty">لا نتائج. جرّب كلمة أخرى.</div>';return}
   ul.innerHTML=rows.map(p=>{
-    return `<li><span class="num">#${p.id}</span><div class="body"><a class="t" href="#p=${p.id}">${highlight(p.title)}</a>`+
+    const has=p.html||p.file||p.photo, tg="https://t.me/"+d.channel+"/"+p.id;
+    const href=has?`#p=${p.id}`:tg, tgt=has?"":' target="_blank" rel="noopener"';
+    return `<li><span class="num">#${p.id}</span><div class="body"><a class="t" href="${href}"${tgt}>${highlight(p.title)}</a>`+
       `<div class="tags"><span class="tag">${esc(d.cats[p.cat]||"")}</span><span class="tag k">${esc(d.kinds[p.kind]||"")}</span>${p.auto?'<span class="tag new">جديد</span>':""}</div></div>`+
-      `<a class="go" href="#p=${p.id}">عرض</a></li>`;
+      `<a class="go" href="${href}"${tgt}>فتح</a></li>`;
   }).join("");
   S.rows=rows;
 }
@@ -155,7 +157,7 @@ function showPost(id){
     const url=`https://github.com/${repo}/releases/download/files/${encodeURIComponent(p.file.asset)}`;
     h+=`<div class="dl"><div class="fn">${esc(p.file.name)}<small>${size(p.file.size)}</small></div><a href="${url}">تحميل</a></div>`;
   }
-  if(!p.html&&!p.file&&!p.photo)h+=`<div class="pend">محتوى هذا المنشور يُضاف بعد اكتمال أرشفة القناة.</div>`;
+  h+=`<div class="dl"><div class="fn">المنشور في القناة</div><a href="https://t.me/${d.channel}/${p.id}" target="_blank" rel="noopener">فتح في تيليجرام</a></div>`;
   const i=(S.rows||[]).findIndex(x=>x.id===id),prev=S.rows&&S.rows[i-1],next=S.rows&&S.rows[i+1];
   h+=`</div><div class="nav2">`+(prev?`<button type="button" onclick="location.hash='p=${prev.id}'">→ السابق</button>`:"<span></span>")+
      (next?`<button type="button" onclick="location.hash='p=${next.id}'">التالي ←</button>`:"<span></span>")+`</div>`;

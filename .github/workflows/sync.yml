@@ -1,0 +1,30 @@
+name: مزامنة منشورات القناة
+
+on:
+  schedule:
+    - cron: "17 */3 * * *"   # كل 3 ساعات
+  workflow_dispatch:          # تشغيل يدوي من تبويب Actions
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/sync.mjs
+      - name: حفظ التحديث
+        run: |
+          if [ -n "$(git status --porcelain data)" ]; then
+            git config user.name "bahth-sync-bot"
+            git config user.email "actions@users.noreply.github.com"
+            git add data/posts.json
+            git commit -m "تحديث الفهرس بمنشورات جديدة"
+            git push
+          else
+            echo "لا جديد"
+          fi

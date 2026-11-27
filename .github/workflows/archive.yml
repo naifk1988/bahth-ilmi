@@ -1,9 +1,8 @@
 name: أرشفة القناة
 
+# معطّل حاليًا (تشغيل يدوي فقط) — يُستعمل لاحقًا إذا أُضيفت رموز البوت
 on:
-  schedule:
-    - cron: "17 */3 * * *"   # كل 3 ساعات: يضيف الجديد فقط
-  workflow_dispatch:          # تشغيل يدوي من تبويب Actions
+  workflow_dispatch:
 
 permissions:
   contents: write
