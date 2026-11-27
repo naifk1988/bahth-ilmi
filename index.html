@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>فهرس قناة البحث العلمي</title>
+<meta name="description" content="فهرس مصنّف لكل ما نُشر في قناة «البحث العلمي» على تيليجرام: ملفات وكشافات ومواقع وفوائد للباحثين.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f3ea; --paper:#fffdf8; --ink:#1f2433; --muted:#6b6a72;
+  --navy:#1d2a44; --gold:#b08a3e; --gold-soft:#f1e6cc; --line:#e6dcc6;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Amiri",serif;font-size:18px;line-height:1.7}
+header{background:var(--navy);color:#fff;padding:28px 18px 22px;text-align:center}
+header h1{margin:0;font-size:30px}
+header p{margin:6px 0 0;color:#d9cfb8;font-size:16px}
+header a{color:var(--gold-soft)}
+.wrap{max-width:900px;margin:0 auto;padding:0 14px}
+.bar{position:sticky;top:0;z-index:5;background:var(--bg);padding:14px 0 8px;border-bottom:1px solid var(--line)}
+#q{width:100%;padding:12px 14px;font:inherit;font-size:18px;border:1px solid var(--line);border-radius:12px;background:var(--paper)}
+#q:focus{outline:2px solid var(--gold);border-color:transparent}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:10px 0 4px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:4px 14px;font:inherit;font-size:16px;cursor:pointer;white-space:nowrap}
+.chip b{color:var(--gold);font-weight:700;margin-inline-start:4px}
+.chip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.chip.on b{color:var(--gold-soft)}
+.meta{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:15px;padding:6px 0}
+.meta button{font:inherit;font-size:15px;background:none;border:none;color:var(--navy);cursor:pointer;text-decoration:underline}
+ul{list-style:none;margin:0;padding:0 0 40px}
+li{background:var(--paper);border:1px solid var(--line);border-radius:14px;margin:10px 0;padding:12px 14px;display:flex;gap:12px;align-items:flex-start}
+.num{flex:none;min-width:48px;text-align:center;color:var(--gold);font-weight:700;font-size:16px;padding-top:2px}
+.body{flex:1;min-width:0}
+.t{font-size:19px;font-weight:700;color:var(--ink);text-decoration:none;display:block}
+.t:hover{color:var(--gold)}
+.tags{margin-top:4px;display:flex;flex-wrap:wrap;gap:6px;font-size:14px}
+.tag{background:var(--gold-soft);color:#6d5320;border-radius:6px;padding:0 8px}
+.tag.k{background:#e8ebf2;color:var(--navy)}
+.tag.new{background:var(--navy);color:#fff}
+.go{flex:none;align-self:center;background:var(--navy);color:#fff;text-decoration:none;border-radius:10px;padding:6px 12px;font-size:15px}
+.empty{text-align:center;color:var(--muted);padding:40px 0}
+footer{text-align:center;color:var(--muted);font-size:14px;padding:10px 0 30px}
+mark{background:#f5dd9e;color:inherit;border-radius:3px}
+</style>
+</head>
+<body>
+<header>
+  <h1>فهرس قناة «البحث العلمي»</h1>
+  <p>كل ما نُشر في <a href="https://t.me/al_bahth_al_ilmi" target="_blank" rel="noopener">القناة</a> مصنّفًا بعناوين — يُحدَّث تلقائيًا مع كل منشور جديد</p>
+</header>
+<div class="wrap">
+  <div class="bar">
+    <input id="q" type="search" placeholder="ابحث: مخطوطات، كشاف، الشاملة، مجلة…" autocomplete="off">
+    <div class="chips" id="cats"></div>
+    <div class="chips" id="kinds"></div>
+    <div class="meta"><span id="count"></span><button id="sort" type="button">الأقدم أولًا</button></div>
+  </div>
+  <ul id="list"></ul>
+  <footer id="foot"></footer>
+</div>
+<script>
+const S={data:null,cat:"",kind:"",q:"",newest:true};
+const norm=s=>s.replace(/[ً-ْٰـ]/g,"").replace(/[أإآ]/g,"ا").replace(/ى/g,"ي").replace(/ة/g,"ه").toLowerCase();
+const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function chip(box,key,val,label,n){
+  const b=document.createElement("button");b.className="chip"+(S[key]===val?" on":"");b.type="button";
+  b.innerHTML="<bdi>"+esc(label)+"</bdi>"+(n!=null?" <b>"+n+"</b>":"");
+  b.onclick=()=>{S[key]=S[key]===val&&val!==""?"":val;render()};box.appendChild(b);
+}
+function highlight(t){
+  if(!S.q)return esc(t);
+  const words=S.q.split(/\s+/).filter(Boolean);let out=esc(t);
+  // light highlight on exact (unnormalized) matches only
+  words.forEach(w=>{if(w.length>1)out=out.split(esc(w)).join("<mark>"+esc(w)+"</mark>")});
+  return out;
+}
+function render(){
+  const d=S.data,words=norm(S.q).split(/\s+/).filter(Boolean);
+  const match=p=>words.every(w=>p._n.includes(w));
+  const base=d.posts.filter(match);
+  const cats=document.getElementById("cats"),kinds=document.getElementById("kinds");
+  cats.innerHTML="";kinds.innerHTML="";
+  const inKind=base.filter(p=>!S.kind||p.kind===S.kind);
+  chip(cats,"cat","","الكل",inKind.length);
+  Object.entries(d.cats).forEach(([k,v])=>{const n=inKind.filter(p=>p.cat===k).length;if(n)chip(cats,"cat",k,v,n)});
+  const inCat=base.filter(p=>!S.cat||p.cat===S.cat);
+  chip(kinds,"kind","","كل الأنواع",null);
+  Object.entries(d.kinds).forEach(([k,v])=>{const n=inCat.filter(p=>p.kind===k).length;if(n)chip(kinds,"kind",k,v,n)});
+  let rows=inCat.filter(p=>!S.kind||p.kind===S.kind);
+  rows.sort((a,b)=>S.newest?b.id-a.id:a.id-b.id);
+  document.getElementById("count").textContent=rows.length+" منشورًا";
+  document.getElementById("sort").textContent=S.newest?"الأقدم أولًا":"الأحدث أولًا";
+  const ul=document.getElementById("list");
+  if(!rows.length){ul.innerHTML='<div class="empty">لا نتائج. جرّب كلمة أخرى.</div>';return}
+  ul.innerHTML=rows.map(p=>{
+    const url="https://t.me/"+d.channel+"/"+p.id;
+    return `<li><span class="num">#${p.id}</span><div class="body"><a class="t" href="${url}" target="_blank" rel="noopener">${highlight(p.title)}</a>`+
+      (p.desc?`<div style="color:var(--muted);font-size:15px">${esc(p.desc)}</div>`:"")+
+      `<div class="tags"><span class="tag">${esc(d.cats[p.cat]||"")}</span><span class="tag k">${esc(d.kinds[p.kind]||"")}</span>${p.auto?'<span class="tag new">جديد</span>':""}</div></div>`+
+      `<a class="go" href="${url}" target="_blank" rel="noopener">فتح</a></li>`;
+  }).join("");
+}
+let t;document.getElementById("q").addEventListener("input",e=>{clearTimeout(t);t=setTimeout(()=>{S.q=e.target.value.trim();render()},120)});
+document.getElementById("sort").onclick=()=>{S.newest=!S.newest;render()};
+fetch("data/posts.json",{cache:"no-cache"}).then(r=>r.json()).then(d=>{
+  d.posts.forEach(p=>p._n=norm(p.title+" "+(p.desc||"")+" "+(d.cats[p.cat]||"")));
+  S.data=d;
+  const last=d.updated?new Date(d.updated).toLocaleDateString("ar-SA"):"";
+  document.getElementById("foot").textContent=d.posts.length+" منشورًا مفهرسًا"+(last?" · آخر تحديث "+last:"");
+  render();
+}).catch(()=>{document.getElementById("list").innerHTML='<div class="empty">تعذّر تحميل الفهرس.</div>'});
+</script>
+</body>
+</html>
